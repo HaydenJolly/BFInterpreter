@@ -1,4 +1,3 @@
-import java.util.*;
 /**
  * Add documentation eventually
  * Doesn't currently include functionality for the , instruction
@@ -10,7 +9,6 @@ public class Interpreter
     private char instruction;
     private byte [] mem;
     private int memIndex, instructionIndex, instructionEnd;
-    private Scanner in;
 
     public Interpreter(String _instructions)
     {
@@ -19,7 +17,6 @@ public class Interpreter
         memIndex = 0;
         instructionIndex = 0;
         instructionEnd = instructions.length();
-        in = new Scanner(System.in);
     }
 
     public void runProgram()
