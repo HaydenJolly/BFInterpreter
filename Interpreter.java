@@ -1,6 +1,8 @@
 import java.util.*;
 /**
- * Add Documentation
+ * Add documentation eventually
+ * Doesn't currently include functionality for the , instruction
+ * Haven't tested if it properly deals with comments
  */
 public class Interpreter
 {
