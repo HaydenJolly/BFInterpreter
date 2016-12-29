@@ -1,6 +1,5 @@
 /**
  * Add documentation eventually
- * Doesn't currently include functionality for the , instruction
  * Haven't tested if it properly deals with comments
  */
 public class Interpreter
@@ -67,6 +66,12 @@ public class Interpreter
 
                 case '.':
                 System.out.print((char)mem[memIndex]);
+                break;
+                    
+                case ',':
+                System.out.print("\nEnter an ASCII character whose value will be stored in the current cell: ");
+                mem[memIndex] = (byte)in.next().charAt(0);
+                in.nextLine();
                 break;
             }
             instructionIndex++;
