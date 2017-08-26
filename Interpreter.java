@@ -1,15 +1,13 @@
-/**
- * Add documentation eventually
- * Haven't tested if it properly deals with comments
- */
-public class Interpreter
+//Note: assuming that given instructions are valid brainfuck w/o comments
+
+public class BFInterpreter
 {
     private String instructions; 
     private char instruction;
     private byte [] mem;
     private int memIndex, instructionIndex, instructionEnd;
 
-    public Interpreter(String _instructions)
+    public BFInterpreter(String _instructions)
     {
         instructions = _instructions;
         mem = new byte [30000];
@@ -20,15 +18,18 @@ public class Interpreter
 
     public void runProgram()
     {
+        //iterate over all instructions
         while(instructionIndex < instructionEnd)
         {
             instruction = instructions.charAt(instructionIndex);
             switch (instruction)
             {
+                //increments memory at memIndex (wraps around to 0 after 256)
                 case '+':
                 mem[memIndex] = (byte)(++mem[memIndex] % 256);
                 break;
-
+                
+                //decrement memory at memIndex (wraps to 255 below 0)
                 case '-':
                 if (mem[memIndex] > 0)
                 {
@@ -38,11 +39,13 @@ public class Interpreter
                     mem[memIndex] = (byte)255;
                 }
                 break;
-
+                
+                //points memIndex one unit forward (wraps back to 0)
                 case '>':
                 memIndex = ++memIndex % 30000;
                 break;
 
+                //points memIndex one unit backwards (wraps to end)
                 case '<':
                 if (memIndex > 0)
                 {
@@ -53,6 +56,7 @@ public class Interpreter
                 }
                 break;
 
+                //checks loop conidition and seeks loop close
                 case '[':
                 if (mem[memIndex] == 0)
                 {
@@ -60,14 +64,17 @@ public class Interpreter
                 }
                 break;
 
+                //seeks loop open
                 case ']':
                 instructionIndex = findLoopOpen();
                 break;
 
+                //outputs the ascii character associated with current memory value
                 case '.':
                 System.out.print((char)mem[memIndex]);
                 break;
                     
+                //sets the current memory location to the value of an ascii character input
                 case ',':
                 System.out.print("\nEnter an ASCII character whose value will be stored in the current cell: ");
                 mem[memIndex] = (byte)in.next().charAt(0);
@@ -104,7 +111,7 @@ public class Interpreter
         return --localInstructionIndex;
     }
 
-    public int findLoopOpen()//int instructionIndex)
+    public int findLoopOpen()
     {
         int loopEnds = 0;
         boolean foundOpen = false;
