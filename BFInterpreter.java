@@ -1,5 +1,3 @@
-//Note: assuming that given instructions are valid brainfuck w/o comments
-
 public class BFInterpreter
 {
     private String instructions; 
